@@ -22,10 +22,7 @@ public class BrowserUtils {
 
     }
 
-    /**
-     This method accepts String expected title
-     @param expectedTitle
-     */
+
     public static void assertTitle(String expectedTitle){
 
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
@@ -36,13 +33,10 @@ public class BrowserUtils {
         Assert.assertEquals(expectedTitle, actualTitle);
     }
 
-    /**
-     This method accepts a List<WebElements> and returns List<String>
-     @param webElementList
-     */
+
     public static List<String> getElementsText(List<WebElement> webElementList){
 
-        //Create placeholder List<String>
+
         List<String> actualAsString = new ArrayList<>();
 
         for (WebElement each : webElementList) {
@@ -55,10 +49,7 @@ public class BrowserUtils {
 
     }
 
-    /*
-     * switches to new window by the exact title
-     * returns to original window if windows with given title not found
-     */
+
     public static void switchToWindow(String targetTitle) {
         String origin = Driver.getDriver().getWindowHandle();
         for (String handle : Driver.getDriver().getWindowHandles()) {
@@ -135,12 +126,7 @@ public class BrowserUtils {
         return element;
     }
 
-    /**
-     * Verifies whether the element matching the provided locator is displayed on page
-     * fails if the element matching the provided locator is not found or not displayed
-     *
-     * @param by
-     */
+
     public static void verifyElementDisplayed(By by) {
         try {
             assertTrue("Element not visible: " + by, Driver.getDriver().findElement(by).isDisplayed());
@@ -150,12 +136,7 @@ public class BrowserUtils {
         }
     }
 
-    /**
-     * Verifies whether the element is displayed on page
-     * fails if the element is not found or not displayed
-     *
-     * @param element
-     */
+
     public static void verifyElementDisplayed(WebElement element) {
         try {
             assertTrue("Element not visible: " + element, element.isDisplayed());
@@ -166,11 +147,6 @@ public class BrowserUtils {
     }
 
 
-    /**
-     * Waits for element to be not stale
-     *
-     * @param element
-     */
     public void waitForStaleElement(WebElement element) {
         int y = 0;
         while (y <= 15) {
@@ -196,12 +172,7 @@ public class BrowserUtils {
         }
     }
 
-    /**
-     * Selects a random value from a dropdown list and returns the selected Web Element
-     *
-     * @param select
-     * @return
-     */
+
     public WebElement selectRandomTextFromDropdown(Select select) {
         Random random = new Random();
         List<WebElement> weblist = select.getOptions();
@@ -210,50 +181,28 @@ public class BrowserUtils {
         return select.getFirstSelectedOption();
     }
 
-    /**
-     * Clicks on an element using JavaScript
-     *
-     * @param element
-     */
+
     public void clickWithJS(WebElement element) {
         ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
         ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].click();", element);
     }
 
 
-    /**
-     * Scrolls down to an element using JavaScript
-     *
-     * @param element
-     */
     public void scrollToElement(WebElement element) {
         ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
-    /**
-     * Performs double click action on an element
-     *
-     * @param element
-     */
+
     public void doubleClick(WebElement element) {
         new Actions(Driver.getDriver()).doubleClick(element).build().perform();
     }
 
-    /**
-     * Changes the HTML attribute of a Web Element to the given value using JavaScript
-     *
-     * @param element
-     * @param attributeName
-     * @param attributeValue
-     */
+
     public void setAttribute(WebElement element, String attributeName, String attributeValue) {
         ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);", element, attributeName, attributeValue);
     }
 
-    /**
-     * @param element
-     * @param check
-     */
+
     public void selectCheckBox(WebElement element, boolean check) {
         if (check) {
             if (!element.isSelected()) {
